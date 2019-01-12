@@ -13,15 +13,15 @@ const ResultsContainer = (props) => {
 
 
   const returnedImages = props.images.map((currentImage) => {
-    return (
-      <ImageCard key={currentImage.id} imageDetails={currentImage} />
-    )
+    // return (
+      // <ImageCard key={currentImage.id} imageDetails={currentImage} />
+    // )
   })
   return (
     <div>
-      <GridWrapper>
+      {/* <GridWrapper>
         {returnedImages}
-      </GridWrapper>
+      </GridWrapper> */}
     </div>
   );
 }

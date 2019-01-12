@@ -21,11 +21,12 @@ class ImageCard extends Component {
     });
   };
 
-  render(props) {
-    const generatedImg = props.generatedImages.map((img, index) => {
+  render() {
+      console.log(this.props);
+    const generatedImg = this.props.generatedImages.map((img, index) => {
       return <img alt={img.description} src={img.urls.regular} key={index} />;
     });
-    const { description, urls } = this.props.imageDetails;
+    const { description, urls } = this.props.generatedImages;
     const GridImage = styled.img`
       max-width: 100%;
     `;
@@ -39,12 +40,11 @@ class ImageCard extends Component {
     `;
     return (
       <GridImageContainer>
-        {" "}
-        {generatedImg}{" "}
-        <GridImageLink href={urls.raw} target="_blank">
-          <GridImage ref={this.imageRef} alt={description} src={urls.regular} />{" "}
-        </GridImageLink>{" "}
-        <figcaption> </figcaption>{" "}
+        {generatedImg}
+        {/* <GridImageLink href={urls.raw} target="_blank"> */}
+          <GridImage ref={this.imageRef} alt={description} src={urls.regular} />
+        {/* </GridImageLink> */}
+        <figcaption> </figcaption>
       </GridImageContainer>
     );
   }

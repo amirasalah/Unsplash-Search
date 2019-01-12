@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import SearchContainer from '../Containers/SearchResultsContainer';
+import React, { Component } from "react";
+import MainWrapper from "../Containers/MainWrapper";
 
 class App extends Component {
-  
   render() {
     return (
       <div className="App">
-        <SearchContainer/>
+        <MainWrapper />
       </div>
     );
   }
