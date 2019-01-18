@@ -7,8 +7,9 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: [],
-      inputVisible: false
+      inputVisible: false,
+      GeneratedImages: [],
+      numOfImages: 0
     };
   }
   onSearchSubmit = searchTerm => {
@@ -19,21 +20,11 @@ class Header extends Component {
     })
       .then(response => {
         this.setState({
-          images: response.data.results
+          GeneratedImages: response.data.results
         });
+        this.props.ImagesResults(this.state.GeneratedImages);
       })
-      .catch(function(error) {
-        console.log(error);
-      });
-  };
-  keyPress = e => {
-    if (e.keyCode === 13) {
-      if (this.state.numOfImages > 1) {
-        this.generateRandomImages(this.state.numOfImages);
-      } else {
-        alert("Please specify number of images");
-      }
-    }
+      .catch(function(error) {});
   };
   generateRandomImages(count) {
     UnsplashAxiosInstance.get("/photos/random", {
@@ -43,12 +34,27 @@ class Header extends Component {
     }).then(response => {
       if (response) {
         this.setState({
-          manyGeneratedImages: response.data,
-          inputVisible: false
+          inputVisible: false,
+          GeneratedImages: response.data
         });
+        this.props.ImagesResults(this.state.GeneratedImages);
       }
     });
   }
+  keyPress = e => {
+    if (e.keyCode === 13) {
+      if (this.state.numOfImages > 1) {
+        this.generateRandomImages(this.state.numOfImages);
+      } else {
+        alert("Please specify number of images");
+      }
+    }
+  };
+  imagesCount = e => {
+    this.setState({
+      numOfImages: e.target.value
+    });
+  };
   showInput = () => {
     this.setState({
       inputVisible: true
@@ -67,7 +73,7 @@ class Header extends Component {
       );
     }
     return (
-      <div>
+      <header>
         <SearchBar searchSubmit={this.onSearchSubmit} />
         <Button
           buttonText="Generate one Random Image!"
@@ -78,7 +84,7 @@ class Header extends Component {
           buttonClicked={this.showInput}
         />
         {inputText}
-      </div>
+      </header>
     );
   }
 }

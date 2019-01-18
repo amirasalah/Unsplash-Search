@@ -1,28 +1,33 @@
 import React from "react";
-import UnsplashAxiosInstance from "../APIs/unsplash";
+import styled from "styled-components";
+// import UnsplashAxiosInstance from "../APIs/unsplash";
 import ImageCard from "../Components/ImageCard";
 
 class SearchResultsContainer extends React.Component {
-  state = {
-    manyGeneratedImages: [],
-    numOfImages: 0
+  constructor(props) {
+    super(props);
+    this.state = {
+      clickedImage: {}
+    };
+  }
+  clickedImageDetails = img => {
+    this.props.clickedImage(img);
   };
-
-  imagesCount = e => {
-    this.setState({
-      numOfImages: e.target.value
-    });
-  };
-
   render() {
-    let RandomImageComponent;
-    if (this.state.manyGeneratedImages.length) {
-      RandomImageComponent = (
-        <ImageCard generatedImages={this.state.manyGeneratedImages} />
-      );
-    }
-
-    return <div className="search__container">{RandomImageComponent}</div>;
+    const GridWrapper = styled.section`
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-gap: 0 10px;
+      grid-auto-rows: 12px;
+    `;
+    return (
+      <GridWrapper>
+        {this.props.GeneratedImagesFinal.map(imgDetails => {
+          return <ImageCard key={imgDetails.id} Image={imgDetails}
+          />;
+        })}
+      </GridWrapper>
+    );
   }
 }
 export default SearchResultsContainer;

@@ -20,13 +20,11 @@ class ImageCard extends Component {
       spans
     });
   };
-
+  openImageDetails = (e, clickedImage) => {
+    e.preventDefault();
+    this.props.clickedImage(clickedImage);
+  };
   render() {
-      console.log(this.props);
-    const generatedImg = this.props.generatedImages.map((img, index) => {
-      return <img alt={img.description} src={img.urls.regular} key={index} />;
-    });
-    const { description, urls } = this.props.generatedImages;
     const GridImage = styled.img`
       max-width: 100%;
     `;
@@ -39,13 +37,26 @@ class ImageCard extends Component {
       grid-row-end: span ${this.state.spans};
     `;
     return (
-      <GridImageContainer>
-        {generatedImg}
-        {/* <GridImageLink href={urls.raw} target="_blank"> */}
-          <GridImage ref={this.imageRef} alt={description} src={urls.regular} />
-        {/* </GridImageLink> */}
-        <figcaption> </figcaption>
-      </GridImageContainer>
+      <React.Fragment>
+        <GridImageContainer >
+          <GridImageLink
+            onClick={event => this.openImageDetails(event, this.props.Image)}
+            target="_blank"
+          >
+            <GridImage
+              ref={this.imageRef}
+              alt={this.props.Image.description}
+              src={this.props.Image.urls.regular}
+            />
+          </GridImageLink>
+        </GridImageContainer>
+      </React.Fragment>
+      // <GridImageContainer>
+      //   {/* <GridImageLink href={urls.raw} target="_blank"> */}
+      //   {/* <GridImage ref={this.imageRef} alt={description} src={urls.regular} /> */}
+      //   {/* </GridImageLink> */}
+      //   <figcaption> </figcaption>
+      // </GridImageContainer>
     );
   }
 }
