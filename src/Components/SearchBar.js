@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+
 class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: "Searching about ?!"
+      searchTerm: "Fancy Wha ?!"
     };
   }
   onInputChange = event => {
@@ -17,9 +19,19 @@ class SearchBar extends Component {
   };
 
   render() {
+    const SearchBar = styled.input`
+      width: 50vw;
+      height: 50px;
+      padding: 0 20px;
+      margin-bottom: 25px;
+      border: 5px solid #f2c39a;
+      ::placeholder {
+        color: rosybrown;
+      }
+    `;
     return (
       <form onSubmit={this.onFormSubmit}>
-        <input
+        <SearchBar
           placeholder={this.state.searchTerm}
           onChange={this.onInputChange}
           type="text"

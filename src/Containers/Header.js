@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchBar from "../Components/SearchBar";
 import UnsplashAxiosInstance from "../APIs/unsplash";
 import Button from "../Components/Button";
+import styled from "styled-components";
 
 class Header extends Component {
   constructor(props) {
@@ -62,6 +63,14 @@ class Header extends Component {
   };
   render() {
     let inputText;
+    const Header = styled.header`
+      background: linear-gradient(to right, #e25c59, #f2c39a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction:column;
+      padding: 50px 0;
+    `;
     if (this.state.inputVisible) {
       inputText = (
         <input
@@ -73,18 +82,21 @@ class Header extends Component {
       );
     }
     return (
-      <header>
+      <Header>
         <SearchBar searchSubmit={this.onSearchSubmit} />
-        <Button
-          buttonText="Generate one Random Image!"
-          buttonClicked={() => this.generateRandomImages(1)}
-        />
-        <Button
-          buttonText="Generate Many Random Images!"
-          buttonClicked={this.showInput}
-        />
+        <div>
+          <Button
+            buttonText="Generate one Random Image!"
+            buttonClicked={() => this.generateRandomImages(1)}
+          />
+          <Button
+            buttonText="Generate Many Random Images!"
+            buttonClicked={this.showInput}
+          />
+        </div>
+
         {inputText}
-      </header>
+      </Header>
     );
   }
 }

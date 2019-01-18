@@ -15,7 +15,7 @@ class ImageCard extends Component {
   }
   setSpans = () => {
     const height = this.imageRef.current.clientHeight;
-    const spans = Math.ceil(height / 12);
+    const spans = Math.ceil(height / 13);
     this.setState({
       spans
     });
@@ -27,36 +27,25 @@ class ImageCard extends Component {
   render() {
     const GridImage = styled.img`
       max-width: 100%;
-    `;
-    const GridImageLink = styled.a`
-      width: 100%;
-      display: block;
+      border: 4px solid ${this.props.Image.color};
+      box-shadow: 6px 5px 11px 0px rgba(0,0,0,0.38);
+
     `;
     const GridImageContainer = styled.figure`
       margin: 20px 0;
       grid-row-end: span ${this.state.spans};
+      margin-bottom:20px;
     `;
     return (
       <React.Fragment>
-        <GridImageContainer >
-          <GridImageLink
-            onClick={event => this.openImageDetails(event, this.props.Image)}
-            target="_blank"
-          >
-            <GridImage
-              ref={this.imageRef}
-              alt={this.props.Image.description}
-              src={this.props.Image.urls.regular}
-            />
-          </GridImageLink>
+        <GridImageContainer>
+          <GridImage
+            ref={this.imageRef}
+            alt={this.props.Image.description}
+            src={this.props.Image.urls.regular}
+          />
         </GridImageContainer>
       </React.Fragment>
-      // <GridImageContainer>
-      //   {/* <GridImageLink href={urls.raw} target="_blank"> */}
-      //   {/* <GridImage ref={this.imageRef} alt={description} src={urls.regular} /> */}
-      //   {/* </GridImageLink> */}
-      //   <figcaption> </figcaption>
-      // </GridImageContainer>
     );
   }
 }

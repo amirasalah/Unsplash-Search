@@ -18,7 +18,7 @@ class SearchResultsContainer extends React.Component {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       grid-gap: 0 10px;
-      grid-auto-rows: 12px;
+      grid-auto-rows: 13px;
     `;
     return (
       <GridWrapper>
